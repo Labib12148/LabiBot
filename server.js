@@ -11,7 +11,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyCABtA4CgZ_afGYLglDpsMIFuzztMts30Y"
+const API_KEY = "ENTER YOUR API KEY"
 
 let history = [
   {
