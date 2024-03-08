@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>About</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../labibot.html" class="title">
+            <img src="../assets/chat.png" alt="LabiBot" class="title-image">
+            LabiBot
+        </a>
+        <button class="menu-button" onclick="toggleNavbarButtons()">  •  •  •  </button>
+        <div class="navbar-buttons">
+            <a href="../labibot.html" class="navbar-button">LabiBot</a>
+            <a href="./about.html" class="navbar-button">About</a>
+            <a href="./features.html" class="navbar-button">Features</a>
+        </div>
+      </nav>
+      <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Fell free to cantact us with this email.</p>
+                <p>Email: <a href="mailto:labib12148@gmail.com">labib12148@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+
+function toggleNavbarButtons() {
+    var navbarButtons = document.querySelector('.navbar-buttons');
+    navbarButtons.classList.toggle('show');
+  }
+</script>
+</html>

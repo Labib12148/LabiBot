@@ -7,7 +7,6 @@
   },
   "license": "ISC",
   "scripts": {
-    "deploy":"netlify deploy --prod",
     "lab": "node serverForME.js",
     "start": "node server.js"
 

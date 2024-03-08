@@ -1,34 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LabiBot</title>
-  <link rel="icon" href="./assets/chat.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabiBot - Your Virtual Assistant</title>
+    <link rel="icon" href="./chatbot/assets/chat.png" type="image/png">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="/" class="title">
-      <img src="./assets/chat.png" alt="LabiBotYT" class="title-image">
-      LabiBot
-  </a>
-  </nav>
-  <div class="clear-chat-container">
-    <button class="clear-chat-button" onclick="clearChat()">Clear Chat</button>
-  </div>
-  <div class="chat-container" id="chat-container"></div>
-  <div class="input-container">
-    <label for="image-input" class="attach-button" id="file-label">
-      <span class="attach-text">Attach Image</span>
-      <input type="file" id="image-input" accept="image/*" style="display: none;" onchange="displayFileName(this)">
-      <span id="file-name" class="file-name"></span>
-    </label>
-    <input type="text" class="input-field" id="prompt" name="prompt" placeholder="Message LabiBot...">
-    <button class="send-button" onclick="sendMessage()">Send</button>
-    <div class="loading-indicator" id="loading-indicator">Loading...</div>
-  </div>
 
-  <script src="script.js"></script>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="width: 50px; margin-right: 2px; margin-bottom: 10px;" src="./chatbot/assets/chat.png" alt="image">
+            LabiBot
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#featured-comments">Featured Comments</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About LabiBot</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="jumbotron">
+    <div class="container">
+        <h1>Welcome to LabiBot</h1>
+        <p>Your Cool Virtual Assistant</p>
+        <button class="btn btn-primary" id="labibot-button">Try LabiBot</button>
+    </div>
+</section>
+
+<script>
+    const labibot = "./chatbot/labibot.html"
+    document.getElementById("labibot-button").onclick = function() {
+        window.location.href = labibot;
+    };
+</script>
+
+<!-- Features Section -->
+<section id="features" class="features">
+    <div class="container">
+        <h2>Features</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">24/7 Availability</h3>
+                        <p class="card-text">Get assistance anytime, anywhere.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">Intelligent Responses</h3>
+                        <p class="card-text">Receive personalized and accurate responses.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">Southern Accent</h3>
+                        <p class="card-text">Labibot is here to talk in a cool southern accent.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Updated feature items -->
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">Entertaining Conversations</h3>
+                        <p class="card-text">Engage in entertaining conversations with LabiBot.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">Personalized Assistance</h3>
+                        <p class="card-text">Receive tailored assistance according to your needs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-item">
+                    <div class="card-body">
+                        <h3 class="card-title">Efficient Task Management</h3>
+                        <p class="card-text">Efficiently manage your tasks with LabiBot's help.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Featured Comments Section -->
+<section id="featured-comments" class="featured-comments">
+    <div class="container">
+        <h2>Featured Comments</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="featured-comments-card">
+                    <p>"LabiBot has made my day by his cool accent and he is very user-friendly!"</p>
+                    <small>- Laibdul</small>
+                </div>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="featured-comments-card">
+                    <p>"I'm amazed by the capabilities of LabiBot. It's like having a personal assistant right at my fingertips!"</p>
+                    <small>- Shifu Jackson</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container">
+        <h2>About LabiBot</h2>
+        <div class="about-section">
+            <p>LabiBot is a leading provider of virtual assistant solutions, dedicated to enhancing productivity and efficiency for individuals and businesses worldwide. Our team consists of experienced professionals passionate about leveraging cutting-edge technology to simplify tasks and streamline workflows.</p>
+            <p>But we're not just your ordinary virtual assistant service. Meet LabiBot - our charismatic virtual assistant with a southern and cool accent. LabiBot is more than just a tool; he's your reliable companion in getting things done. With his entertaining personality, LabiBot brings a touch of fun and excitement to every interaction.</p>
+            <p>From scheduling appointments to managing complex projects, LabiBot can do it all. Need a joke to lighten the mood? LabiBot's got you covered. Want to hear a cool story while he completes your tasks? LabiBot is ready to entertain you.</p>
+            <p>At LabiBot, we believe that productivity shouldn't be boring. That's why we've infused our virtual assistant solutions with LabiBot's unique charm and wit. Get ready to experience a whole new level of efficiency and enjoyment with LabiBot by your side.</p>
+            <p>Join the countless satisfied users who have already experienced the benefits of partnering with LabiBot. Discover how our virtual assistant solutions can transform the way you work and revolutionize your productivity - all with a southern twist!</p>
+            <h2>LabiBot is now collaborating with LabiYT</h2>
+            <p>LabiBot is collaborating with LabiYT to provide enhanced features for YouTube recommendations. To utilize these features, simply append the "--yt" tag at the end of your commands.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- FAQ Section -->
+<section id="faq" class="faq">
+    <div class="container">
+        <h2>FAQ</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card faq-card">
+                    <div class="card-body">
+                        <h3 class="card-title">How to use LabiYT with LabiBot?</h3>
+                        <p class="card-text">Simply add "--yt" tag at the end of your command to use it.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card faq-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Is LabiBot compatible with all devices?</h3>
+                        <p class="card-text">Yes, LabiBot is compatible with smartphones, tablets, and computers.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card faq-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Can I change LabiBot's accent?</h3>
+                        <p class="card-text">Yes, you can change LabiBot's accent by using specific commands.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card faq-card">
+                    <div class="card-body">
+                        <h3 class="card-title">How accurate is LabiBot?</h3>
+                        <p class="card-text">LabiBot strives for high accuracy in its responses. However, like any AI-based system, its accuracy may vary depending on the complexity of the query and the quality of the input.</p>
+                    </div>
+                </div>
+            </div>
+            
+    </div>
+</section>
+
+
+<!-- Contact Us Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <p>Fell free to cantact us with this email.</p>
+            <p>Email: <a href="mailto:labib12148@gmail.com">labib12148@gmail.com</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 LabiBot. All rights reserved.</p>
+    </div>
+</footer>
+
 </body>
 </html>

@@ -40,8 +40,8 @@ async function sendMessage() {
                 memory.chatHistory.push({ sender: "LabiBot", message: data.response });
                 saveChatHistory();
             } else {
-                displayMessage("LabiBot", "I can't assist with that. Try generating something else.");
-                memory.chatHistory.push({ sender: "LabiBot", message: "I can't assist with that. Try generating something else." });
+                displayMessage("LabiBot", "Well, howdy there, partner! Y'all know, I'm all about spreading good vibes, but reckon I can't wrangle up what you're lookin' for. How 'bout we rustle up somethin' else that'll tickle your fancy?");
+                memory.chatHistory.push({ sender: "LabiBot", message: "Well, howdy there, partner! Y'all know, I'm all about spreading good vibes, but reckon I can't wrangle up what you're lookin' for. How 'bout we rustle up somethin' else that'll tickle your fancy?" });
                 saveChatHistory();
             }
         } catch (error) {
@@ -63,14 +63,14 @@ async function sendMessage() {
                 memory.chatHistory.push({ sender: "LabiBot", message: data.response });
                 saveChatHistory();
             } else {
-                displayMessage("LabiBot", "I can't assist with that. Try generating something else.");
-                memory.chatHistory.push({ sender: "LabiBot", message: "I can't assist with that. Try generating something else." });
+                displayMessage("LabiBot", "Well, howdy there, partner! Y'all know, I'm all about spreading good vibes, but reckon I can't wrangle up what you're lookin' for. How 'bout we rustle up somethin' else that'll tickle your fancy?");
+                memory.chatHistory.push({ sender: "LabiBot", message: "Well, howdy there, partner! Y'all know, I'm all about spreading good vibes, but reckon I can't wrangle up what you're lookin' for. How 'bout we rustle up somethin' else that'll tickle your fancy?" });
                 saveChatHistory();
             }
         } catch (error) {
             console.error("Error generating content:", error.message);
             displayMessage("LabiBot", "I can't assist with that.");
-            memory.chatHistory.push({ sender: "LabiBot", message: "I can't assist with that. Try generating something else." });
+            memory.chatHistory.push({ sender: "LabiBot", message: "Well, howdy there, partner! Y'all know, I'm all about spreading good vibes, but reckon I can't wrangle up what you're lookin' for. How 'bout we rustle up somethin' else that'll tickle your fancy?" });
             saveChatHistory();
         }
     }
@@ -187,3 +187,8 @@ function clearChat() {
 
     saveChatHistory();
 }
+function toggleNavbarButtons() {
+    var navbarButtons = document.querySelector('.navbar-buttons');
+    navbarButtons.classList.toggle('show');
+  }
+  

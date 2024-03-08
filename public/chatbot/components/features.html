@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Features</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../labibot.html" class="title">
+            <img src="../assets/chat.png" alt="LabiBot" class="title-image">
+            LabiBot
+        </a>
+        <button class="menu-button" onclick="toggleNavbarButtons()">  •  •  •  </button>
+        <div class="navbar-buttons">
+            <a href="../labibot.html" class="navbar-button">LabBot</a>
+            <a href="./about.html" class="navbar-button">About</a>
+            <a href="./contact.html" class="navbar-button">Contact</a>
+        </div>
+      </nav>
+      <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">24/7 Availability</h3>
+                            <p class="card-text">Get assistance anytime, anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">Intelligent Responses</h3>
+                            <p class="card-text">Receive personalized and accurate responses.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">Southern Accent</h3>
+                            <p class="card-text">Labibot is here to talk in a cool southern accent.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">Entertaining Conversations</h3>
+                            <p class="card-text">Engage in entertaining conversations with LabiBot.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">Personalized Assistance</h3>
+                            <p class="card-text">Receive tailored assistance according to your needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-item">
+                        <div class="card-body">
+                            <h3 class="card-title">Efficient Task Management</h3>
+                            <p class="card-text">Efficiently manage your tasks with LabiBot's help.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+function toggleNavbarButtons() {
+    var navbarButtons = document.querySelector('.navbar-buttons');
+    navbarButtons.classList.toggle('show');
+  }
+</script>
+</html>

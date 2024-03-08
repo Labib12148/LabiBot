@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold,} = require("@google/generative-ai");
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const upload = multer({ dest: '/tmp' });
