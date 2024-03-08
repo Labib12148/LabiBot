@@ -2,11 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold,} = require("@google/generative-ai");
 const fs = require('fs');
-const path = require('path');
 
 const app = express();
-const upload = multer({ dest: '/tmp' });
 const port = 12148;
+const upload = multer({ dest: '/tmp' });
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -184,20 +183,24 @@ async function runChat(userInput) {
   if (userInput.includes("--yt")) {
     try {
       const stripHtmlTags = (html) => {
-        return html.replace(/<[^>]*>?/gm, '');
+        return html.replace(/<[^>]*>?/gm, ''); // Replace HTML tags with an empty string
       };
       
+      // Extracting userInput without '--yt'
       const query = userInput.replace('--yt', '').trim();
 
+      // Fetch YouTube videos using YouTube Data API with maxResults set to 15 and type=video to filter out non-video content
       const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&q=${encodeURIComponent(query)}&type=video&safeSearch=strict&maxResults=10`);
       const youtubeData = await youtubeResponse.json();
       
+      // Extract video recommendations and links
       const videoRecommendations = youtubeData.items.map(item => ({
           title: stripHtmlTags(item.snippet.title), // Remove HTML tags from the title
           videoId: item.id.videoId,
           link: `https://www.youtube.com/watch?v=${item.id.videoId}`
       }));
       
+      // Create response text with video recommendations and links
     let responseText = `Here are some recommended YouTube videos based on "${query}":\n`;
       videoRecommendations.forEach(video => {
           responseText += `- ${video.title}: <a href="${video.link}" target="_blank" style="color: #007bff;">${video.link}</a>\n`; // Embed video links as HTML anchor tags
@@ -223,6 +226,7 @@ async function runChat(userInput) {
         return "Sorry, I couldn't fetch YouTube recommendations based on your query at the moment.";
     }
 
+    //normal chat
   } else {
       
       const genAI = new GoogleGenerativeAI(API_KEY);
@@ -238,6 +242,7 @@ async function runChat(userInput) {
 
       let responseText = '';
       for await (const chunk of responseStream) {
+          // Handle each chunk of response
           const chunkText = chunk.text();
           console.log(chunkText);
           responseText += chunkText;
@@ -256,7 +261,7 @@ async function runChat(userInput) {
       history.push(newUserRole);
       history.push(newAIRole);
       console.log(history);
-      return responseText;
+      return responseText; // Return the complete response text
   }
 }
 
@@ -269,6 +274,7 @@ app.post('/chat', async (req, res) => {
 
     const response = await runChat(userInput);
     
+    // Check if the response is null or undefined
     if (!response) {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -312,7 +318,7 @@ app.post('/Image', upload.single('image'), async (req, res) => {
 });
 
 
-app.listen(port,()=>{
-  console.log(`LabiBot is running on https://localhost:${port}`)
-}
-);
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
