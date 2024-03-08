@@ -1,16 +1,14 @@
-/* Global styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #f2f6fc;
   color: #333;
   margin: 0;
   padding: 0;
   transition: all 0.3s ease;
 }
 
-/* Navbar styles */
 .navbar {
-  background-color: #007bff;
+  background-color: #7f8fa6;
   transition: background-color 0.3s ease;
 }
 
@@ -26,9 +24,8 @@ body {
   transition: color 0.3s ease;
 }
 
-/* Jumbotron styles */
 .jumbotron {
-  background-color: #007bff;
+  background-color: #7f8fa6;
   color: #fff;
   padding: 100px 0;
   text-align: center;
@@ -51,17 +48,16 @@ body {
   border: none;
   border-radius: 25px;
   background-color: #fff;
-  color: #007bff;
+  color: #7f8fa6;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .jumbotron button:hover {
-  background-color: #0056b3;
+  background-color: #5c677d;
   color: #fff;
 }
-  
-/* Features section styles */
+
 .features {
   background-color: #fff;
   padding: 50px 0;
@@ -75,16 +71,15 @@ body {
 }
 
 .feature-item {
+  background-color: rgba(255, 255, 255, 0.1);
   margin-bottom: 30px;
   border-radius: 12px;
   height: 170px;
-
 }
 
-/* featured-comments section styles */
 .featured-comments {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #7f8fa6;
+  color: #fff; 
   padding: 100px 0;
   text-align: center;
 }
@@ -112,7 +107,6 @@ body {
   font-style: italic;
 }
 
-/* About section styles */
 .about {
   background-color: #fff;
   padding: 100px 0;
@@ -129,13 +123,13 @@ body {
   font-size: 20px;
   margin-bottom: 30px;
 }
-.about-section{
+
+.about-section {
   text-align: left;
 }
 
-/* FAQ section styles */
 .faq {
-  background-color: #007bff;
+  background-color: #7f8fa6; 
   color: #fff;
   padding: 100px 0;
   text-align: center;
@@ -167,10 +161,12 @@ body {
   font-size: 18px;
   margin-bottom: 0;
 }
+
 .faq-card {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   margin-bottom: 30px;
+  height: 160px;
 }
 
 .faq-card .card-body {
@@ -178,13 +174,13 @@ body {
   padding: 20px;
   margin-bottom: 30px;
 }
+
 .faq-card .card-title {
   font-weight: bold;
 }
 
-/* Contact section styles */
 .contact {
-  background-color: #fff;
+  background-color: #fff; 
   padding: 100px 0;
   text-align: center;
 }
@@ -200,7 +196,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Footer styles */
 footer {
   background-color: #333;
   color: #fff;
