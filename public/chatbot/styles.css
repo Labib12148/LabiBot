@@ -130,6 +130,7 @@ body {
 .attach-button {
   background-color: #9f87e6;
   margin-right: 10px;
+  height: 45px;
 }
 
 .send-button {

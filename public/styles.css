@@ -1,7 +1,6 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f2f6fc;
-  color: #333;
   margin: 0;
   padding: 0;
   transition: all 0.3s ease;
@@ -9,6 +8,10 @@ body {
 
 .navbar {
   background-color: #7f8fa6;
+  padding: 10px 20px;
+  width: 100%;
+  z-index: 1;
+  position: fixed;
   transition: background-color 0.3s ease;
 }
 
@@ -27,7 +30,7 @@ body {
 .jumbotron {
   background-color: #7f8fa6;
   color: #fff;
-  padding: 100px 0;
+  padding: 150px 0;
   text-align: center;
 }
 
@@ -60,7 +63,7 @@ body {
 
 .features {
   background-color: #fff;
-  padding: 50px 0;
+  padding: 100px 0;
   text-align: center;
 }
 
