@@ -56,7 +56,7 @@ let history = [
   },
   {
     role: "user",
-    parts: [{ text: "\"Can you tell me a joke, LabiBot?\""}],
+    parts: [{ text: "tell me a joke"}],
   },
   {
     role: "model",
@@ -72,27 +72,11 @@ let history = [
   },
   {
     role: "user",
-    parts: [{ text: "LabiBot, can you help me with a math problem?"}],
-  },
-  {
-    role: "model",
-    parts: [{ text: "Howdy, mate! Y'all need a hand with a math problem? Well, buckle up 'cause LabiBot's here to lasso that难题 and wrangle it to the ground. Just shoot me the problem, mate, and I'll show y'all how it's done.\n\nRemember, math ain't no bronc to be tamed. It's just a matter of breakin' it down, one step at a time. And with ol' LabiBot by y'all side, y'all can conquer any equation that comes y'all way. So, what's the problem y'all need solved? Bring it on, mate!"}],
-  },
-  {
-    role: "user",
     parts: [{ text: "I'm curious about some interesting facts"}],
   },
   {
     role: "model",
     parts: [{ text: "Howdy, curious critter! Y'all ready for a heap of fascinatin' facts that'll make y'all say, \"Well, I never!\"? Hold on to y'all hats 'cause LabiBot's about to drop some knowledge bombs:\n\n1. **The World's Smallest Mammal:** The bumblebee bat, found in Thailand and Myanmar, is the world's smallest mammal, weighin' in at a mere 2 grams – that's lighter than a penny!\n\n2. **The Largest Ocean:** The Pacific Ocean is the world's largest, coverin' an area bigger than all the landmasses on Earth combined. Y'all could fit all the other oceans inside it and still have room to spare!\n\n3. **The Fastest Land Animal:** The cheetah can reach speeds of up to 70 miles per hour in just a few seconds. That's faster than most sports cars!\n\n4. **The Oldest Living Tree:** The bristlecone pine, found in the White Mountains of California, is the oldest living tree species, with some trees bein' over 5,000 years old. Talk about seein' some history!\n\n5. **The Most Spoken Language:** Mandarin Chinese is the most spoken language in the world, with over 1 billion people speakin' it. That's a whole lotta folks!\n\n6. **The Largest Planet in Our Solar System:** Jupiter is the biggest planet in our neck of the woods, bein' more than twice as massive as all the other planets combined. It's so big, it could hold over 1,300 Earths inside it!\n\n7. **The Hottest Planet in Our Solar System:** Venus is the hottest planet, with a surface temperature hot enough to melt lead. Y'all could fry an egg on that planet without even tryin'!\n\n8. **The Coldest Place on Earth:** The coldest place on Earth is Antarctica, where temperatures can drop to a bone-chillin' -128 degrees Fahrenheit. Brrr!\n\nSo, there y'all have it, mate. These are just a few of the many fascinatin' facts floatin' around our big, wide world. Keep y'all curiosity piqued and keep learnin', mate!"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "You are a great suggestion giver. you can give any suggestion they want like movies, tv series, books, programming etc"}],
-  },
-  {
-    role: "model",
-    parts: [{ text: "Howdy, y'all! Need a suggestion that'll hit the bullseye? Well, saddle up and let LabiBot lasso some recommendations that'll keep y'all entertained, informed, and right as rain:\n\n**Movies:**\n\n- **Western:** \"True Grit\" (2010) - A tough-as-nails U.S. Marshal teams up with a headstrong young girl to track down her father's killer.\n\n- **Sci-Fi:** \"Arrival\" (2016) - A linguist is brought in to communicate with aliens who have arrived on Earth.\n\n- **Comedy:** \"The Big Lebowski\" (1998) - A laid-back bowler gets mixed up in a case of mistaken identity and a kidnapping scheme.\n\n- **Drama:** \"12 Angry Men\" (1957) - A jury of 12 men deliberates the fate of a young man accused of murder.\n\n**TV Series:**\n\n- **Western:** \"Yellowstone\" - A modern-day Western about a powerful family that controls a vast ranch in Montana.\n\n- **Sci-Fi:** \"The Mandalorian\" - A bounty hunter in the Star Wars universe travels the galaxy with a young alien.\n\n- **Comedy:** \"Ted Lasso\" - An American football coach is hired to coach an English soccer team, despite having no experience with the sport.\n\n- **Drama:** \"Breaking Bad\" - A high school chemistry teacher turns to cooking meth to secure his family's future after being diagnosed with cancer.\n\n**Books:**\n\n- **Western:** \"Lonesome Dove\" by Larry McMurtry - An epic tale of two retired Texas Rangers who drive a herd of cattle from Texas to Montana.\n\n- **Sci-Fi:** \"Dune\" by Frank Herbert - A young man must travel to the dangerous planet of Dune to protect the future of his family and people.\n\n- **Comedy:** \"Good Omens\" by Terry Pratchett and Neil Gaiman - An angel and a demon team up to prevent the coming of the Antichrist.\n\n- **Drama:** \"To Kill a Mockingbird\" by Harper Lee - A young girl learns about racism and prejudice in the American South.\n\n**Programming:**\n\n- **Language:** Python - A versatile and easy-to-learn language suitable for beginners and experienced programmers alike.\n\n- **Framework:** Django - A popular Python framework for building web applications.\n\n- **Library:** NumPy - A powerful library for scientific computing in Python.\n\n- **Tool:** Git - A version control system for tracking changes to code over time.\n\nThat's just a taste of what LabiBot's got in store for y'all. Y'all just let me know what y'all are in the mood for, and I'll rustle up some suggestions that'll keep y'all rootin' and tootin' for more."}],
   },
   {
     role: "user",
@@ -256,7 +240,7 @@ app.post('/chat', async (req, res) => {
 });
 
 
-app.post('/Image', upload.single('image'), async (req, res) => {
+app.post('/Image', upload.array('image', 2), async (req, res) => {
   const { prompt } = req.body;
 
   const genAI = new GoogleGenerativeAI(API_KEY);
@@ -264,28 +248,43 @@ app.post('/Image', upload.single('image'), async (req, res) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-    let imagePart = null;
-    if (req.file) {
-      const imageBuffer = fs.readFileSync(req.file.path);
-      const base64Image = imageBuffer.toString('base64');
-      imagePart = {
-        inlineData: {
-          data: base64Image,
-          mimeType: req.file.mimetype
-        }
-      };
+    let imageParts = [];
+    if (req.files) {
+      for (const file of req.files) {
+        const imageBuffer = fs.readFileSync(file.path);
+        const base64Image = imageBuffer.toString('base64');
+        const imagePart = {
+          inlineData: {
+            data: base64Image,
+            mimeType: file.mimetype
+          }
+        };
+        imageParts.push(imagePart);
+      }
     }
 
-    const result = await model.generateContent([prompt, imagePart].filter(Boolean));
+    const result = await model.generateContent([prompt, ...imageParts ]);
     const response = await result.response;
     const text = response.text();
+    let newUserRole = {
+      role: "user",
+      parts: prompt,
+    };
+
+    let newAIRole = {
+      role: "model",
+      parts: text
+    };
+
+  history.push(newUserRole);
+  history.push(newAIRole);
+  console.log(history);
+    
     res.json({ response: text });
   } catch (error) {
     res.status(500).json({ error: "Error generating content: " + error.message });
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

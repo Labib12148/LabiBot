@@ -1,14 +1,21 @@
 let memory = {
     lastPrompt: "",
     chatHistory: []
-};
-
-document.getElementById("prompt").addEventListener("keypress", async function(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        await sendMessage();
+  };
+  
+  document.getElementById("prompt").addEventListener("keydown", async function(event) {
+    // Check for Shift key pressed along with Enter
+    if (event.keyCode === 13 && event.shiftKey) {
+      // Prevent default Enter behavior (new line)
+      event.preventDefault();
+      // Insert a new line character manually
+      document.getElementById('prompt').value += '\n';
+    } else if (event.keyCode === 13) {
+      event.preventDefault();
+      await sendMessage();
     }
-});
+  });
+    
 
 async function sendMessage() {
     const promptInput = document.getElementById('prompt');
@@ -29,7 +36,12 @@ async function sendMessage() {
         try {
             const formData = new FormData();
             formData.append('prompt', prompt);
-            formData.append('image', imageInput.files[0]);
+            
+            // Loop through each selected file and append it to FormData
+            for (let i = 0; i < imageInput.files.length; i++) {
+                formData.append('image', imageInput.files[i]);
+            }
+            
             const response = await fetch('/Image', {
                 method: 'POST',
                 body: formData
@@ -105,10 +117,32 @@ memory.chatHistory.forEach(message => {
 document.getElementById('prompt').value = memory.lastPrompt;
 
 function displayFileName(input) {
-    const fileName = input.files[0].name;
-    const maxLength = 15;
-    let displayText = fileName.length > maxLength ? fileName.substring(0, maxLength) + "..." : fileName;
-    document.getElementById('file-name').textContent = "- " + displayText;
+    const fileNamesElement = document.getElementById('file-name');
+    fileNamesElement.innerHTML = '';
+
+    const files = input.files;
+    
+    // Check if more than 2 files are selected
+    if (files.length > 2) {
+        input.value = ''; // Clear the selection
+        const alertMessage = 'You can only attach up to 2 files.';
+        window.alert(alertMessage);
+        
+        const alertBox = document.querySelector('.alert');
+        if (alertBox) {
+            alertBox.classList.add('alert');
+        }
+        return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+        const fileName = files[i].name;
+        const maxLength = 15;
+        let displayText = fileName.length > maxLength ? fileName.substring(0, maxLength) + "..." : fileName;
+        const fileNameElement = document.createElement('div');
+        fileNameElement.textContent = "- " + displayText;
+        fileNamesElement.appendChild(fileNameElement);
+    }
 }
 
 async function displayMessage(sender, message) {
@@ -164,19 +198,11 @@ async function displayMessage(sender, message) {
             const lineBreak = document.createElement('br');
             chatContainer.appendChild(lineBreak);
         }
-
-        if (sender === "LabiBot") {
-            await sleep(60 + Math.random() * 50);
-        }
     }
 
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 
 function clearChat() {
@@ -187,6 +213,17 @@ function clearChat() {
 
     saveChatHistory();
 }
+function alert(message) {
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('alert');
+    alertBox.textContent = message;
+    document.body.appendChild(alertBox);
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000); // Remove the alert after 3 seconds
+}
+
+
 function toggleNavbarButtons() {
     var navbarButtons = document.querySelector('.navbar-buttons');
     navbarButtons.classList.toggle('show');
